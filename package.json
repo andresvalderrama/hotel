@@ -19,6 +19,10 @@
     "mysql": "2.15.0"
   },
   "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-loader": "7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "css-loader": "0.28.8",
     "extract-text-webpack-plugin": "3.0.2",
     "postcss-cssnext": "3.0.2",

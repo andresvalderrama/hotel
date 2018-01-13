@@ -15,6 +15,11 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.jsx?/,
+        include: appDir,
+        loader: 'babel-loader'
+      },
+      {
         test: /\.scss$/,
         exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
