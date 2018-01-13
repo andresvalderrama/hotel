@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 router.get('/', (req, res, next) => {
-  res.render('home/template', { title: 'Express' })
+  res.render('home/template', { pageClass: 'home' })
 })
 
 module.exports = router

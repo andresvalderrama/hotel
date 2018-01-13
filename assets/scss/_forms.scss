@@ -1,0 +1,47 @@
+form {
+  & fieldset {
+    border: 0;
+    padding: 0;
+    position: relative;
+    margin-bottom: 1rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  & section .legend {
+    display: inline-block;
+    flex-basis: 100%;
+    margin: 0px 0 20px;
+    width: 100%;
+  }
+  & label {
+    left: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all linear 125ms;
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+  & input, & select {
+    font: 400 1rem/19px 'Arial', sans-serif;
+    background-color: #fff;
+    border: 0;
+    border-radius: 3px;
+    outline: none;
+    padding: 14px 10px 6px;
+    width: 100%;
+    &:valid + label, &:focus + label {
+      font-size: 12px;
+      top: 0;
+    }
+  }
+  & option {
+    line-height: 1rem;
+  }
+  & .footer {
+    flex-basis: 100%;
+    text-align: right;
+  }
+}

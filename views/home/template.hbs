@@ -1,3 +1,51 @@
 {{!< layout}}
 
-<h1>Home</h1>
+<article>
+  <form action="/reserva/nueva" method="post">
+    <h2>Reservas</h2>
+    <section class="disponibilidad  flex">
+      <b class="one legend">Verificar disponibilidad</b>
+      <fieldset class="one-half">
+        <input id="ingreso" type="text" name="ingreso" required>
+        <label for="ingreso">ingreso</label>
+      </fieldset>
+      <fieldset class="one-half">
+        <input id="salida" type="text" name="salida" required>
+        <label for="salida">salida</label>
+      </fieldset>
+      <fieldset class="one">
+        <select id="huespedes" name="huespedes" required>
+          <option disabled selected></option>
+          <option value="1">1 huesped</option>
+          <option value="2">2 huespedes</option>
+          <option value="3">3 huespedes</option>
+          <option value="4">4 huespedes</option>
+        </select>
+        <label for="huespedes"># huespedes</label>
+      </fieldset>
+      <div class="footer">
+        <button>Ver disponibilidad</button>
+      </div>
+    </section>
+    <section class="habitaciones flex">
+      <b class="one legend">Habitaciones dispobibles</b>
+      <fieldset>
+        <input type="radio" name="habitacion" value="101" id="habitacion-101" required>
+        <label for="habitacion-101">habitacion 101</label>
+      </fieldset>
+      <fieldset>
+        <input type="radio" name="habitacion" value="102" id="habitacion-102" required>
+        <label for="habitacion-102">habitacion 102</label>
+      </fieldset>
+      <fieldset>
+        <input type="radio" name="habitacion" value="103" id="habitacion-103" required>
+        <label for="habitacion-103">habitacion 103</label>
+      </fieldset>
+    </section>
+    <section>
+      <p class="footer">
+        <button>Reservar</button>
+      </p>
+    </section>
+  </form>
+  </article>

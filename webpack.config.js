@@ -28,7 +28,7 @@ const config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('main.css')
+    new ExtractTextPlugin('css/main.css')
   ]
 }
 

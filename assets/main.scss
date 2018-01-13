@@ -1,1 +1,7 @@
-@import './scss/_base.scss'
+/* Global */
+@import './scss/_base.scss';
+@import './scss/_forms.scss';
+@import './scss/_grid.scss';
+
+/* Pages */
+@import './scss/pages/_home.scss';

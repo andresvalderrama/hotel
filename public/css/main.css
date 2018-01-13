@@ -1,0 +1,127 @@
+/* Global */
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+}
+body {
+  background: #fff;
+  font: 400 16px/1.5 'Arial', sans-serif;
+  font: 400 1rem/1.5 'Arial', sans-serif;
+  margin: 0 auto;
+  max-width: 680px;
+}
+form fieldset {
+  border: 0;
+  padding: 0;
+  position: relative;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+form fieldset:last-child {
+  margin-bottom: 0;
+}
+form section .legend {
+  display: inline-block;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  margin: 0px 0 20px;
+  width: 100%;
+}
+form label {
+  left: 10px;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transition: all linear 125ms;
+  transition: all linear 125ms;
+}
+form label:first-letter {
+  text-transform: uppercase;
+}
+form input, form select {
+  font: 400 16px/19px 'Arial', sans-serif;
+  font: 400 1rem/19px 'Arial', sans-serif;
+  background-color: #fff;
+  border: 0;
+  border-radius: 3px;
+  outline: none;
+  padding: 14px 10px 6px;
+  width: 100%;
+}
+form input:valid + label, form input:focus + label, form select:valid + label, form select:focus + label {
+  font-size: 12px;
+  top: 0;
+}
+form option {
+  line-height: 16px;
+  line-height: 1rem;
+}
+form .footer {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  text-align: right;
+}
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.one {
+  width: 100%;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+}
+.one-half {
+  width: calc(50% - 8px);
+  -ms-flex-preferred-size: calc(50% - 8px);
+      flex-basis: calc(50% - 8px);
+}
+/* Pages */
+html.home section.disponibilidad {
+  background: #eaf3f9;
+  border-radius: 3px;
+  max-width: 430px;
+  margin: 0 auto 48px;
+  margin: 0 auto 3rem;
+  padding: 20px;
+}
+html.home section.habitaciones label {
+  background-color: #227ebf;
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  font-size: 16px;
+  font-size: 1rem;
+  left: 0;
+  outline: none;
+  padding: 10px;
+  position: relative;
+  top: 0;
+  -webkit-transition: none;
+  transition: none;
+  -webkit-transform: none;
+          transform: none;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+html.home section.habitaciones input[type="radio"] {
+  position: absolute;
+  width: auto;
+  width: initial;
+}
+html.home section.habitaciones input[type="radio"]:checked + label {
+  background: rgb(33, 96, 140);
+}
