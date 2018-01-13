@@ -2,14 +2,14 @@ const path = require('path')
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const buildDir = path.resolve(__dirname, 'public')
 const appDir = path.resolve(__dirname, 'assets')
+const buildDir = path.resolve(__dirname, 'public', 'js')
 
 const config = {
-  entry: `${appDir}/app.js`,
+  entry: `${appDir}/app.jsx`,
   output: {
     path: buildDir,
-    filename: 'app.js'
+    filename: '[name].js'
   },
   watch: true,
   module: {
@@ -33,7 +33,9 @@ const config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('css/main.css')
+    new ExtractTextPlugin({
+      filename: '../css/[name].css'
+    })
   ]
 }
 

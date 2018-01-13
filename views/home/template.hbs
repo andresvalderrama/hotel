@@ -3,30 +3,7 @@
 <article>
   <form action="/reserva/nueva" method="post">
     <h2>Reservas</h2>
-    <section class="disponibilidad  flex">
-      <b class="one legend">Verificar disponibilidad</b>
-      <fieldset class="one-half">
-        <input id="ingreso" type="text" name="ingreso" required>
-        <label for="ingreso">ingreso</label>
-      </fieldset>
-      <fieldset class="one-half">
-        <input id="salida" type="text" name="salida" required>
-        <label for="salida">salida</label>
-      </fieldset>
-      <fieldset class="one">
-        <select id="huespedes" name="huespedes" required>
-          <option disabled selected></option>
-          <option value="1">1 huesped</option>
-          <option value="2">2 huespedes</option>
-          <option value="3">3 huespedes</option>
-          <option value="4">4 huespedes</option>
-        </select>
-        <label for="huespedes"># huespedes</label>
-      </fieldset>
-      <div class="footer">
-        <button>Ver disponibilidad</button>
-      </div>
-    </section>
+    <div id="app"></div>
     <section class="habitaciones flex">
       <b class="one legend">Habitaciones dispobibles</b>
       <fieldset>
@@ -48,4 +25,4 @@
       </p>
     </section>
   </form>
-  </article>
+</article>
