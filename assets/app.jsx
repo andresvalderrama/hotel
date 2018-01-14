@@ -12,7 +12,8 @@ class App extends React.Component {
     super()
 
     this.state = {
-      reserva: {}
+      reserva: {},
+      makingRequest: false
     }
 
     this.huespedesSeleccionados = this.huespedesSeleccionados.bind(this)
@@ -24,7 +25,8 @@ class App extends React.Component {
       reserva: {
         registro: fechaSalida ? fechaSalida.getTime() : this.state.reserva.registro,
         salida: this.state.reserva.salida,
-        huespedes: this.state.reserva.huespedes
+        huespedes: this.state.reserva.huespedes,
+        habitacion: this.state.reserva.habitacion
       }
     })
   }
@@ -34,7 +36,8 @@ class App extends React.Component {
       reserva: {
         registro: this.state.reserva.registro,
         salida: fechaSalida ? fechaSalida.getTime() : this.state.reserva.salida,
-        huespedes: this.state.reserva.huespedes
+        huespedes: this.state.reserva.huespedes,
+        habitacion: this.state.reserva.habitacion
       }
     })
   }
@@ -44,7 +47,19 @@ class App extends React.Component {
       reserva: {
         registro: this.state.reserva.registro,
         salida: this.state.reserva.salida,
-        huespedes: event.target.value
+        huespedes: event.target.value ? event.target.value : this.state.reserva.huespedes,
+        habitacion: this.state.reserva.habitacion
+      }
+    })
+  }
+
+  habitacionSeleccionada (event) {
+    this.setState({
+      reserva: {
+        registro: this.state.reserva.registro,
+        salida: this.state.reserva.salida,
+        huespedes: this.state.reserva.huespedes,
+        habitacion: event.target.value ? event.target.value : this.state.reserva.habitacion
       }
     })
   }
@@ -52,6 +67,7 @@ class App extends React.Component {
   submitForm (event) {
     event.preventDefault()
 
+    this.setState({ makingRequest: true })
     this.fakeRequest()
   }
 
@@ -79,9 +95,10 @@ class App extends React.Component {
             id: 5,
             numero: 305
           }
-        ]
+        ],
+        makingRequest: false
       })
-    }, 500)
+    }, 1500)
   }
 
   componentDidUpdate () {
@@ -92,18 +109,19 @@ class App extends React.Component {
     return (<div>
       <form action='/reserva/crear' method='post' onSubmit={this.submitForm}>
         <h2>Reservas</h2>
-        <br />
-        <pre>{ JSON.stringify(this.state) }</pre>
-        <br />
         <Disponibilidad
           reservaState={this.state.reserva}
+          makingRequest={this.state.makingRequest}
           actualizarFechaRegistro={this.actualizarFechaRegistro.bind(this)}
           actualizarFechaSalida={this.actualizarFechaSalida.bind(this)}
           huespedesSeleccionados={this.huespedesSeleccionados.bind(this)}
         />
         {this.state.habitaciones
-          ? <Habitaciones />
+          ? <Habitaciones habitacionesState={this.state.habitaciones} habitacionSeleccionada={this.habitacionSeleccionada.bind(this)} />
           : '' }
+        {this.state.reserva.habitacion
+          ? 'informacion de los huespedes'
+          : ''}
       </form>
     </div>)
   }

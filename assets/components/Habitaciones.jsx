@@ -5,30 +5,26 @@ export default class Habitaciones extends React.Component {
     super()
   }
 
-  componentDidMount () {
-    console.log('componente renderisado')
-  }
-
   render () {
     return (<div>
       <section className='habitaciones flex'>
-        <b className='one legend'>Habitaciones dispobibles</b>
+        <b className='one legend'>Habitaciones disponibles</b>
+        {
+          this.props.habitacionesState.map((habitacion) => {
+            return (<fieldset key={habitacion.id}>
+              <input type='radio' name='habitacion' value={habitacion.id} id={`habitacion-${habitacion.numero}`} required onChange={this.props.habitacionSeleccionada} />
+              <label htmlFor={`habitacion-${habitacion.numero}`}>habitacion {habitacion.numero}</label>
+            </fieldset>)
+          })
+        }
         <fieldset>
           <input type='radio' name='habitacion' value='101' id='habitacion-101' required />
           <label htmlFor='habitacion-101'>habitacion 101</label>
         </fieldset>
-        <fieldset>
-          <input type='radio' name='habitacion' value='102' id='habitacion-102' required />
-          <label htmlFor='habitacion-102'>habitacion 102</label>
-        </fieldset>
-        <fieldset>
-          <input type='radio' name='habitacion' value='103' id='habitacion-103' required />
-          <label htmlFor='habitacion-103'>habitacion 103</label>
-        </fieldset>
       </section>
       <section>
         <p className='footer'>
-          <button>Reservar</button>
+          <button>Seleccionar habitacion</button>
         </p>
       </section>
     </div>)

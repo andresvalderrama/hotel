@@ -85,7 +85,7 @@ export default class Disponibildad extends React.Component {
         </fieldset>
         <div className='footer'>
           <button disabled ref={button => { this.domSubmitButton = button }}
-          >Ver disponibilidad</button>
+          >{this.props.makingRequest ? 'Verificando...' : `Ver disponibilidad`}</button>
         </div>
       </section>
     </div>)

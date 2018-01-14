@@ -17179,7 +17179,8 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
     _this.state = {
-      reserva: {}
+      reserva: {},
+      makingRequest: false
     };
 
     _this.huespedesSeleccionados = _this.huespedesSeleccionados.bind(_this);
@@ -17194,7 +17195,8 @@ var App = function (_React$Component) {
         reserva: {
           registro: fechaSalida ? fechaSalida.getTime() : this.state.reserva.registro,
           salida: this.state.reserva.salida,
-          huespedes: this.state.reserva.huespedes
+          huespedes: this.state.reserva.huespedes,
+          habitacion: this.state.reserva.habitacion
         }
       });
     }
@@ -17205,7 +17207,8 @@ var App = function (_React$Component) {
         reserva: {
           registro: this.state.reserva.registro,
           salida: fechaSalida ? fechaSalida.getTime() : this.state.reserva.salida,
-          huespedes: this.state.reserva.huespedes
+          huespedes: this.state.reserva.huespedes,
+          habitacion: this.state.reserva.habitacion
         }
       });
     }
@@ -17216,7 +17219,20 @@ var App = function (_React$Component) {
         reserva: {
           registro: this.state.reserva.registro,
           salida: this.state.reserva.salida,
-          huespedes: event.target.value
+          huespedes: event.target.value ? event.target.value : this.state.reserva.huespedes,
+          habitacion: this.state.reserva.habitacion
+        }
+      });
+    }
+  }, {
+    key: 'habitacionSeleccionada',
+    value: function habitacionSeleccionada(event) {
+      this.setState({
+        reserva: {
+          registro: this.state.reserva.registro,
+          salida: this.state.reserva.salida,
+          huespedes: this.state.reserva.huespedes,
+          habitacion: event.target.value ? event.target.value : this.state.reserva.habitacion
         }
       });
     }
@@ -17225,6 +17241,7 @@ var App = function (_React$Component) {
     value: function submitForm(event) {
       event.preventDefault();
 
+      this.setState({ makingRequest: true });
       this.fakeRequest();
     }
   }, {
@@ -17249,9 +17266,10 @@ var App = function (_React$Component) {
           }, {
             id: 5,
             numero: 305
-          }]
+          }],
+          makingRequest: false
         });
-      }, 500);
+      }, 1500);
     }
   }, {
     key: 'componentDidUpdate',
@@ -17272,20 +17290,15 @@ var App = function (_React$Component) {
             null,
             'Reservas'
           ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            'pre',
-            null,
-            JSON.stringify(this.state)
-          ),
-          _react2.default.createElement('br', null),
           _react2.default.createElement(_Disponibilidad2.default, {
             reservaState: this.state.reserva,
+            makingRequest: this.state.makingRequest,
             actualizarFechaRegistro: this.actualizarFechaRegistro.bind(this),
             actualizarFechaSalida: this.actualizarFechaSalida.bind(this),
             huespedesSeleccionados: this.huespedesSeleccionados.bind(this)
           }),
-          this.state.habitaciones ? _react2.default.createElement(_Habitaciones2.default, null) : ''
+          this.state.habitaciones ? _react2.default.createElement(_Habitaciones2.default, { habitacionesState: this.state.habitaciones, habitacionSeleccionada: this.habitacionSeleccionada.bind(this) }) : '',
+          this.state.reserva.habitacion ? 'informacion de los huespedes' : ''
         )
       );
     }
@@ -34787,7 +34800,7 @@ var Disponibildad = function (_React$Component) {
                   _this2.domSubmitButton = button;
                 }
               },
-              'Ver disponibilidad'
+              this.props.makingRequest ? 'Verificando...' : 'Ver disponibilidad'
             )
           )
         )
@@ -36374,13 +36387,10 @@ var Habitaciones = function (_React$Component) {
   }
 
   _createClass(Habitaciones, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log('componente renderisado');
-    }
-  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         null,
@@ -36390,8 +36400,21 @@ var Habitaciones = function (_React$Component) {
           _react2.default.createElement(
             'b',
             { className: 'one legend' },
-            'Habitaciones dispobibles'
+            'Habitaciones disponibles'
           ),
+          this.props.habitacionesState.map(function (habitacion) {
+            return _react2.default.createElement(
+              'fieldset',
+              { key: habitacion.id },
+              _react2.default.createElement('input', { type: 'radio', name: 'habitacion', value: habitacion.id, id: 'habitacion-' + habitacion.numero, required: true, onChange: _this2.props.habitacionSeleccionada }),
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'habitacion-' + habitacion.numero },
+                'habitacion ',
+                habitacion.numero
+              )
+            );
+          }),
           _react2.default.createElement(
             'fieldset',
             null,
@@ -36400,26 +36423,6 @@ var Habitaciones = function (_React$Component) {
               'label',
               { htmlFor: 'habitacion-101' },
               'habitacion 101'
-            )
-          ),
-          _react2.default.createElement(
-            'fieldset',
-            null,
-            _react2.default.createElement('input', { type: 'radio', name: 'habitacion', value: '102', id: 'habitacion-102', required: true }),
-            _react2.default.createElement(
-              'label',
-              { htmlFor: 'habitacion-102' },
-              'habitacion 102'
-            )
-          ),
-          _react2.default.createElement(
-            'fieldset',
-            null,
-            _react2.default.createElement('input', { type: 'radio', name: 'habitacion', value: '103', id: 'habitacion-103', required: true }),
-            _react2.default.createElement(
-              'label',
-              { htmlFor: 'habitacion-103' },
-              'habitacion 103'
             )
           )
         ),
@@ -36432,7 +36435,7 @@ var Habitaciones = function (_React$Component) {
             _react2.default.createElement(
               'button',
               null,
-              'Reservar'
+              'Seleccionar habitacion'
             )
           )
         )
