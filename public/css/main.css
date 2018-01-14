@@ -202,6 +202,10 @@
     border-radius: 3px;
 }
 /* Global */
+:root {
+
+  /* formularios */
+}
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -214,7 +218,7 @@ body {
   font: 400 16px/1.5 'Arial', sans-serif;
   font: 400 1rem/1.5 'Arial', sans-serif;
   margin: 0 auto;
-  max-width: 680px;
+  max-width: 430px;
 }
 pre {
   white-space: normal;
@@ -237,6 +241,8 @@ form section .legend {
     width: 100%;
 }
 form label {
+    background-color: #fff;
+    color: #484848;
     left: 10px;
     position: absolute;
     top: 50%;
@@ -252,23 +258,36 @@ form label {
 form label:first-letter {
     text-transform: uppercase;
 }
-form input, form select {
+form input[type=text], form select {
     font: 400 16px/19px 'Arial', sans-serif;
     font: 400 1rem/19px 'Arial', sans-serif;
     background-color: #fff;
-    border: 0;
+    border: 1px solid #dbdbdb;
     border-radius: 3px;
+    color: #484848;
     outline: none;
     padding: 14px 10px 6px;
     width: 100%
 }
-form input:valid + label, form input:focus + label, form select:valid + label, form select:focus + label {
+form input[type=text]:valid + label, form input[type=text]:focus + label, form select:valid + label, form select:focus + label {
     font-size: 12px;
     top: 0;
 }
-form input:focus, form select:focus {
+form input[type=text]:focus, form select:focus {
     -webkit-box-shadow: 0px 0px 2px 1px #c0d3e0;
             box-shadow: 0px 0px 2px 1px #c0d3e0;
+}
+form button, form input[type=submit] {
+    background-color: #FF5A5F;
+    padding: 12px 8px;
+    border: 0;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 700;
+    text-align: center
+}
+form button:disabled, form input[type=submit]:disabled {
+    background-color: rgb(255, 140, 144)
 }
 form option {
     line-height: 16px;
@@ -301,18 +320,14 @@ form .footer {
 }
 /* Pages */
 html.home section.disponibilidad {
-    background: #eaf3f9;
     border-radius: 3px;
-    max-width: 430px;
-    margin: 0 auto 48px;
-    margin: 0 auto 3rem;
-    padding: 20px;
+    margin: 0 0 48px;
+    margin: 0 0 3rem;
 }
 html.home section.habitaciones label {
-    background-color: #227ebf;
-    border: 0;
+    border: 1px solid #dcdcdc;
     border-radius: 3px;
-    color: #fff;
+    color: #484848;
     display: inline-block;
     font-size: 16px;
     font-size: 1rem;
@@ -337,5 +352,8 @@ html.home section.habitaciones input[type="radio"] {
     width: initial;
 }
 html.home section.habitaciones input[type="radio"]:checked + label {
-    background: rgb(33, 96, 140);
+    background: #008489;
+    border-color: #008489;
+    color: #fff;
+    color: #fff;
 }

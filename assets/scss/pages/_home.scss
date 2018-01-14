@@ -1,17 +1,13 @@
 html.home {
   & section.disponibilidad {
-    background: #eaf3f9;
     border-radius: 3px;
-    max-width: 430px;
-    margin: 0 auto 3rem;
-    padding: 20px;
+    margin: 0 0 3rem;
   }
   & section.habitaciones {
     & label {
-      background-color: #227ebf;
-      border: 0;
+      border: 1px solid #dcdcdc;
       border-radius: 3px;
-      color: #fff;
+      color: var(--input-text-color);
       display: inline-block;
       font-size: 1rem;
       left: 0;
@@ -29,7 +25,9 @@ html.home {
       width: initial;
     }
     & input[type="radio"]:checked + label {
-      background: color(#227ebf blackness(45%));
+      background: #008489;
+      border-color: #008489;
+      color: var(--white, #fff);
     }
   }
 }
