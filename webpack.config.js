@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const appDir = path.resolve(__dirname, 'assets')
 const buildDir = path.resolve(__dirname, 'public', 'js')
+const nextcssToCss = new ExtractTextPlugin({ filename: '../css/[name].css' })
 
 const config = {
   entry: `${appDir}/app.jsx`,
@@ -33,9 +34,7 @@ const config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: '../css/[name].css'
-    })
+    nextcssToCss
   ]
 }
 

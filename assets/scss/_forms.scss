@@ -20,6 +20,7 @@ form {
     top: 50%;
     transform: translateY(-50%);
     transition: all linear 125ms;
+    user-select: none;
     &:first-letter {
       text-transform: uppercase;
     }
@@ -35,6 +36,9 @@ form {
     &:valid + label, &:focus + label {
       font-size: 12px;
       top: 0;
+    }
+    &:focus {
+      box-shadow: 0px 0px 2px 1px #c0d3e0;
     }
   }
   & option {
