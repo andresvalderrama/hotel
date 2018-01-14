@@ -22,11 +22,6 @@ export default class Habitaciones extends React.Component {
           <label htmlFor='habitacion-101'>habitacion 101</label>
         </fieldset>
       </section>
-      <section>
-        <p className='footer'>
-          <button>Seleccionar habitacion</button>
-        </p>
-      </section>
     </div>)
   }
 }

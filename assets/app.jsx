@@ -6,6 +6,7 @@ import { render } from 'react-dom'
 
 import Disponibilidad from './components/Disponibilidad.jsx'
 import Habitaciones from './components/Habitaciones.jsx'
+import Huespedes from './components/Huespedes.jsx'
 
 class App extends React.Component {
   constructor (props) {
@@ -119,8 +120,8 @@ class App extends React.Component {
         {this.state.habitaciones
           ? <Habitaciones habitacionesState={this.state.habitaciones} habitacionSeleccionada={this.habitacionSeleccionada.bind(this)} />
           : '' }
-        {this.state.reserva.habitacion
-          ? 'informacion de los huespedes'
+        {this.state.habitaciones && this.state.reserva.habitacion
+          ? <Huespedes />
           : ''}
       </form>
     </div>)

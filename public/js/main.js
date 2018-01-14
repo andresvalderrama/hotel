@@ -17161,6 +17161,10 @@ var _Habitaciones = __webpack_require__(152);
 
 var _Habitaciones2 = _interopRequireDefault(_Habitaciones);
 
+var _Huespedes = __webpack_require__(157);
+
+var _Huespedes2 = _interopRequireDefault(_Huespedes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17298,7 +17302,7 @@ var App = function (_React$Component) {
             huespedesSeleccionados: this.huespedesSeleccionados.bind(this)
           }),
           this.state.habitaciones ? _react2.default.createElement(_Habitaciones2.default, { habitacionesState: this.state.habitaciones, habitacionSeleccionada: this.habitacionSeleccionada.bind(this) }) : '',
-          this.state.reserva.habitacion ? 'informacion de los huespedes' : ''
+          this.state.habitaciones && this.state.reserva.habitacion ? _react2.default.createElement(_Huespedes2.default, null) : ''
         )
       );
     }
@@ -36425,19 +36429,6 @@ var Habitaciones = function (_React$Component) {
               'habitacion 101'
             )
           )
-        ),
-        _react2.default.createElement(
-          'section',
-          null,
-          _react2.default.createElement(
-            'p',
-            { className: 'footer' },
-            _react2.default.createElement(
-              'button',
-              null,
-              'Seleccionar habitacion'
-            )
-          )
         )
       );
     }
@@ -36447,6 +36438,88 @@ var Habitaciones = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Habitaciones;
+
+/***/ }),
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Huespedes = function (_React$Component) {
+  _inherits(Huespedes, _React$Component);
+
+  function Huespedes(props) {
+    _classCallCheck(this, Huespedes);
+
+    return _possibleConstructorReturn(this, (Huespedes.__proto__ || Object.getPrototypeOf(Huespedes)).call(this));
+  }
+
+  _createClass(Huespedes, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'section',
+          { className: 'habitaciones flex' },
+          _react2.default.createElement(
+            'b',
+            { className: 'one legend' },
+            'Informacion de los huespedes'
+          )
+        ),
+        _react2.default.createElement(
+          'fieldset',
+          { className: 'one-half' },
+          _react2.default.createElement('input', { type: 'text', id: 'nombres', required: true }),
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'nombres' },
+            'nombres'
+          )
+        ),
+        _react2.default.createElement(
+          'fieldset',
+          { className: 'one-half' },
+          _react2.default.createElement('input', { type: 'text', id: 'apellidos', required: true }),
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'apellidos' },
+            'apellidos'
+          )
+        )
+      );
+    }
+  }]);
+
+  return Huespedes;
+}(_react2.default.Component);
+
+exports.default = Huespedes;
 
 /***/ })
 /******/ ]);
