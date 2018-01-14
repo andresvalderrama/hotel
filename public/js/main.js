@@ -17183,12 +17183,10 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
     _this.state = {
-      reserva: {},
-      makingRequest: false
+      reserva: {}
     };
 
     _this.huespedesSeleccionados = _this.huespedesSeleccionados.bind(_this);
-    _this.submitForm = _this.submitForm.bind(_this);
     return _this;
   }
 
@@ -17227,6 +17225,8 @@ var App = function (_React$Component) {
           habitacion: this.state.reserva.habitacion
         }
       });
+
+      this.fakeRequest();
     }
   }, {
     key: 'habitacionSeleccionada',
@@ -17239,14 +17239,6 @@ var App = function (_React$Component) {
           habitacion: event.target.value ? event.target.value : this.state.reserva.habitacion
         }
       });
-    }
-  }, {
-    key: 'submitForm',
-    value: function submitForm(event) {
-      event.preventDefault();
-
-      this.setState({ makingRequest: true });
-      this.fakeRequest();
     }
   }, {
     key: 'fakeRequest',
@@ -17270,8 +17262,7 @@ var App = function (_React$Component) {
           }, {
             id: 5,
             numero: 305
-          }],
-          makingRequest: false
+          }]
         });
       }, 1500);
     }
@@ -17288,7 +17279,7 @@ var App = function (_React$Component) {
         null,
         _react2.default.createElement(
           'form',
-          { action: '/reserva/crear', method: 'post', onSubmit: this.submitForm },
+          { action: '/reserva/crear', method: 'post' },
           _react2.default.createElement(
             'h2',
             null,
@@ -34666,15 +34657,6 @@ var Disponibildad = function (_React$Component) {
   }
 
   _createClass(Disponibildad, [{
-    key: 'enableSubmitButton',
-    value: function enableSubmitButton() {
-      var reserva = this.props.reservaState;
-
-      if (!!reserva.registro && !!reserva.salida && !!reserva.huespedes) {
-        this.domSubmitButton.disabled = false;
-      }
-    }
-  }, {
     key: 'fechaRegistroSeleccionada',
     value: function fechaRegistroSeleccionada(fechaRegistro) {
       this.props.actualizarFechaRegistro(fechaRegistro);
@@ -34721,15 +34703,8 @@ var Disponibildad = function (_React$Component) {
       this.reserva = this.props.reservaState;
     }
   }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      this.enableSubmitButton();
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       return _react2.default.createElement(
         'div',
         null,
@@ -34793,18 +34768,6 @@ var Disponibildad = function (_React$Component) {
               'label',
               { htmlFor: 'huespedes' },
               '# huespedes'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'footer' },
-            _react2.default.createElement(
-              'button',
-              { disabled: true, ref: function ref(button) {
-                  _this2.domSubmitButton = button;
-                }
-              },
-              this.props.makingRequest ? 'Verificando...' : 'Ver disponibilidad'
             )
           )
         )

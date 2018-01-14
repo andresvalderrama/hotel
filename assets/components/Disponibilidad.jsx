@@ -6,14 +6,6 @@ export default class Disponibildad extends React.Component {
     super()
   }
 
-  enableSubmitButton () {
-    let reserva = this.props.reservaState
-
-    if (!!reserva.registro && !!reserva.salida && !!reserva.huespedes) {
-      this.domSubmitButton.disabled = false
-    }
-  }
-
   fechaRegistroSeleccionada (fechaRegistro) {
     this.props.actualizarFechaRegistro(fechaRegistro)
 
@@ -57,10 +49,6 @@ export default class Disponibildad extends React.Component {
     this.reserva = this.props.reservaState
   }
 
-  componentDidUpdate () {
-    this.enableSubmitButton()
-  }
-
   render () {
     return (<div>
       <section className='disponibilidad  flex'>
@@ -83,10 +71,6 @@ export default class Disponibildad extends React.Component {
           </select>
           <label htmlFor='huespedes'># huespedes</label>
         </fieldset>
-        <div className='footer'>
-          <button disabled ref={button => { this.domSubmitButton = button }}
-          >{this.props.makingRequest ? 'Verificando...' : `Ver disponibilidad`}</button>
-        </div>
       </section>
     </div>)
   }

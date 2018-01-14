@@ -14,11 +14,9 @@ class App extends React.Component {
 
     this.state = {
       reserva: {},
-      makingRequest: false
     }
 
     this.huespedesSeleccionados = this.huespedesSeleccionados.bind(this)
-    this.submitForm = this.submitForm.bind(this)
   }
 
   actualizarFechaRegistro (fechaSalida) {
@@ -52,6 +50,8 @@ class App extends React.Component {
         habitacion: this.state.reserva.habitacion
       }
     })
+
+    this.fakeRequest()
   }
 
   habitacionSeleccionada (event) {
@@ -63,13 +63,6 @@ class App extends React.Component {
         habitacion: event.target.value ? event.target.value : this.state.reserva.habitacion
       }
     })
-  }
-
-  submitForm (event) {
-    event.preventDefault()
-
-    this.setState({ makingRequest: true })
-    this.fakeRequest()
   }
 
   fakeRequest () {
@@ -96,8 +89,7 @@ class App extends React.Component {
             id: 5,
             numero: 305
           }
-        ],
-        makingRequest: false
+        ]
       })
     }, 1500)
   }
@@ -108,7 +100,7 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <form action='/reserva/crear' method='post' onSubmit={this.submitForm}>
+      <form action='/reserva/crear' method='post'>
         <h2>Reservas</h2>
         <Disponibilidad
           reservaState={this.state.reserva}
