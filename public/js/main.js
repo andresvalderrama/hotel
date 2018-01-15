@@ -17165,6 +17165,10 @@ var _Huespedes = __webpack_require__(153);
 
 var _Huespedes2 = _interopRequireDefault(_Huespedes);
 
+var _Reservar = __webpack_require__(158);
+
+var _Reservar2 = _interopRequireDefault(_Reservar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17243,7 +17247,8 @@ var App = function (_React$Component) {
           salida: this.state.reserva.salida,
           habitacion: event.target.value ? Number(event.target.value) : this.state.reserva.habitacion
         },
-        huespedes: this.state.huespedes
+        huespedes: this.state.huespedes,
+        reservar: true
       });
     }
   }, {
@@ -17281,7 +17286,9 @@ var App = function (_React$Component) {
   }, {
     key: 'guardarHuesped',
     value: function guardarHuesped(huespedes) {
-      console.log('guarder huespedes', huespedes);
+      this.setState({
+        huespedes: huespedes
+      });
     }
   }, {
     key: 'componentDidUpdate',
@@ -17314,7 +17321,8 @@ var App = function (_React$Component) {
           }),
           this.state.habitaciones ? _react2.default.createElement(_Habitaciones2.default, { parentState: this.state, habitacionSeleccionada: this.habitacionSeleccionada.bind(this) }) : '',
           this.state.habitaciones && this.state.reserva.habitacion ? _react2.default.createElement(_Huespedes2.default, { parentState: this.state,
-            guardarHuesped: this.guardarHuesped }) : ''
+            guardarHuesped: this.guardarHuesped }) : '',
+          this.state.reservar ? _react2.default.createElement(_Reservar2.default, null) : ''
         )
       );
     }
@@ -36453,7 +36461,9 @@ var Huespedes = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Huespedes.__proto__ || Object.getPrototypeOf(Huespedes)).call(this));
 
     _this.state = {};
-    _this.fakeState = Array(props.parentState.huespedes.length);
+    _this.fakeState = props.parentState.huespedes.map(function (i) {
+      return Object();
+    });
 
     _this.informacionHuesped = _this.informacionHuesped.bind(_this);
     return _this;
@@ -36484,11 +36494,6 @@ var Huespedes = function (_React$Component) {
       this.fakeState[heuspedNumero] = this.fakeState[heuspedNumero] || {};
       this.fakeState[heuspedNumero][name] = value.trim();
 
-      this.setState(this.fakeState);
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
       this.props.guardarHuesped(this.fakeState);
     }
   }, {
@@ -36582,6 +36587,64 @@ var Huespedes = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Huespedes;
+
+/***/ }),
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */,
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Reservar = function (_React$Component) {
+  _inherits(Reservar, _React$Component);
+
+  function Reservar(props) {
+    _classCallCheck(this, Reservar);
+
+    return _possibleConstructorReturn(this, (Reservar.__proto__ || Object.getPrototypeOf(Reservar)).call(this, props));
+  }
+
+  _createClass(Reservar, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'section',
+        { className: 'footer' },
+        _react2.default.createElement(
+          'button',
+          null,
+          'Reserva habitaci\xF3n'
+        )
+      );
+    }
+  }]);
+
+  return Reservar;
+}(_react2.default.Component);
+
+exports.default = Reservar;
 
 /***/ })
 /******/ ]);

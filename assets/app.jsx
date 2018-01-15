@@ -7,6 +7,7 @@ import { render } from 'react-dom'
 import Disponibilidad from './components/Disponibilidad.jsx'
 import Habitaciones from './components/Habitaciones.jsx'
 import Huespedes from './components/Huespedes.jsx'
+import Reservar from './components/Reservar.jsx'
 
 class App extends React.Component {
   constructor (props) {
@@ -67,7 +68,8 @@ class App extends React.Component {
         salida: this.state.reserva.salida,
         habitacion: event.target.value ? Number(event.target.value) : this.state.reserva.habitacion
       },
-      huespedes: this.state.huespedes
+      huespedes: this.state.huespedes,
+      reservar: true
     })
   }
 
@@ -107,7 +109,9 @@ class App extends React.Component {
   }
 
   guardarHuesped (huespedes) {
-    console.log('guarder huespedes', huespedes)
+    this.setState({
+      huespedes: huespedes
+    })
   }
 
   componentDidUpdate () {
@@ -134,6 +138,9 @@ class App extends React.Component {
         {this.state.habitaciones && this.state.reserva.habitacion
           ? <Huespedes parentState={this.state}
             guardarHuesped={this.guardarHuesped} />
+          : ''}
+        {this.state.reservar
+          ? <Reservar />
           : ''}
       </form>
     </div>)

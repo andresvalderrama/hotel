@@ -5,7 +5,7 @@ export default class Huespedes extends React.Component {
     super()
 
     this.state = {}
-    this.fakeState = Array(props.parentState.huespedes.length)
+    this.fakeState = props.parentState.huespedes.map(i => Object())
 
     this.informacionHuesped = this.informacionHuesped.bind(this)
   }
@@ -30,10 +30,6 @@ export default class Huespedes extends React.Component {
     this.fakeState[heuspedNumero] = this.fakeState[heuspedNumero] || {}
     this.fakeState[heuspedNumero][name] = value.trim()
 
-    this.setState(this.fakeState)
-  }
-
-  componentDidUpdate () {
     this.props.guardarHuesped(this.fakeState)
   }
 
