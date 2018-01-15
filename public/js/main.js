@@ -36385,9 +36385,28 @@ var Habitaciones = function (_React$Component) {
   }
 
   _createClass(Habitaciones, [{
+    key: 'filtrarHabitaciones',
+    value: function filtrarHabitaciones() {
+      var _this2 = this;
+
+      this.habitacionesFiltradas = this.props.parentState.habitaciones.filter(function (habitacion) {
+        return _this2.props.parentState.huespedes.length > 2 && habitacion.numero_habitacion > 200;
+      });
+    }
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.filtrarHabitaciones();
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log(this.habitacionesFiltradas);
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _react2.default.createElement(
         'div',
@@ -36400,12 +36419,12 @@ var Habitaciones = function (_React$Component) {
             { className: 'one legend' },
             'Habitaciones disponibles'
           ),
-          this.props.parentState.habitaciones.map(function (habitacion) {
+          this.habitacionesFiltradas.map(function (habitacion) {
             return _react2.default.createElement(
               'fieldset',
-              { key: habitacion.id, 'class': habitacion.tipo },
+              { key: habitacion.id, className: habitacion.tipo },
               _react2.default.createElement('input', { type: 'radio', name: 'habitacion', value: habitacion.id, id: 'habitacion-' + habitacion.numero_habitacion, required: true,
-                onChange: _this2.props.habitacionSeleccionada }),
+                onChange: _this3.props.habitacionSeleccionada }),
               _react2.default.createElement(
                 'label',
                 { htmlFor: 'habitacion-' + habitacion.numero_habitacion },
