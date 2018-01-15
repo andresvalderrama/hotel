@@ -3,9 +3,8 @@ const router = require('express').Router()
 const queries = require('../database/queries')
 
 router.post('/reservas/crear', (req, res, next) => {
-  let reserva = req.body.reserva
-
-  queries.postReserva(reserva)
+  let reservacion = req.body
+  queries.postReserva(reservacion)
     .then(reserva => res.json(reserva))
     .catch(error => {
       next(error)
@@ -13,7 +12,7 @@ router.post('/reservas/crear', (req, res, next) => {
 })
 
 router.post('/reservas', (req, res, next) => {
-  queries.getHabitaciones(req.body)
+  queries.getHabitaciones(req.body.reserva)
     .then(rawData => {
       let reservaciones = []
 

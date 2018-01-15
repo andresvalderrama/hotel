@@ -84,7 +84,7 @@ class App extends React.Component {
     console.log('App state', this.state)
 
     if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
-      axios.post('/api/v1/reservas', this.state.reserva)
+      axios.post('/api/v1/reservas', this.state)
         .then(response => {
           this.setState({
             habitaciones: response.data,

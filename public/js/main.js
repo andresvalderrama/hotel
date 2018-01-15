@@ -17270,7 +17270,7 @@ var App = function (_React$Component) {
       console.log('App state', this.state);
 
       if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
-        _axios2.default.post('/api/v1/reservas', this.state.reserva).then(function (response) {
+        _axios2.default.post('/api/v1/reservas', this.state).then(function (response) {
           _this2.setState({
             habitaciones: response.data,
             makingRequest: false

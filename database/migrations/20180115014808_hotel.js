@@ -16,21 +16,22 @@ exports.up = (knex, Promise) => {
       table.foreign('habitacion_id')
         .references('id').inTable('habitaciones')
     })
+    .createTable('personas', table => {
+      table.increments('id').primary().notNullable()
+      table.string('nombre')
+      table.string('apellidos')
+      table.string('numero-documento')
+      table.string('tipo-documento')
+      table.integer('reserva_id').unsigned()
+
+      table.foreign('reserva_id')
+        .references('id').inTable('reservaciones')
+    })
 }
-
-/*
-knex('users')
-.select(knex.raw('count(*) as user_count, status'))
-.where(knex.raw(1))
-.orWhere(knex.raw('status <> ?', [1]))
-.groupBy('status')
-Outputs:
-select count(*) as user_count, status from `users` where 1 or status <> 1 group by `status`
-*/
-
 
 exports.down = (knex, Promise) => {
   return knex.schema
+    .dropTableIfExists('personas')
     .dropTableIfExists('reservaciones')
     .dropTableIfExists('habitaciones')
 }
