@@ -1,9 +1,10 @@
 html.home {
   & section.disponibilidad {
     border-radius: 3px;
-    margin: 0 0 3rem;
+    margin-bottom: 3rem;
   }
   & section.habitaciones {
+    margin-bottom: 3px;
     & label {
       border: 1px solid #dcdcdc;
       border-radius: 3px;
@@ -28,6 +29,24 @@ html.home {
       background: #008489;
       border-color: #008489;
       color: var(--white, #fff);
+    }
+  }
+  & section.huespedes {
+    counter-reset: section;
+    & .huesped {
+      position: relative;
+      margin-bottom: 30px;
+      .counter{
+        font-size: 14px;
+        font-weight: 700;
+        padding: 8px 0;
+        position: absolute;
+        right: calc(100% + 14px);
+        &:before {
+          counter-increment: section;
+          content: counter(section);
+        }
+      }
     }
   }
 }

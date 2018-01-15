@@ -13,9 +13,9 @@ export default class Disponibildad extends React.Component {
     this.registro.setStartRange(fechaRegistro)
     this.salida.setStartRange(fechaRegistro)
     this.salida.setMinDate(fechaRegistro)
-    //this.salida.setMinDate(addDays(this.startDate2, 1))
+    // this.salida.setMinDate(addDays(this.startDate2, 1))
 
-    if (this.reserva.registro && !this.reserva.salida) return this.salida.show()
+    if (this.props.parentState.reserva.registro && !this.props.parentState.reserva.salida) return this.salida.show()
   }
 
   fechaSalidaSeleccionada (fechaSalida) {
@@ -26,7 +26,7 @@ export default class Disponibildad extends React.Component {
     this.registro.setMaxDate(fechaSalida)
     this.salida.setEndRange(fechaSalida)
 
-    if (this.reserva.salida && !this.reserva.registro) return this.registro.show()
+    if (this.props.parentState.reserva.salida && !this.props.parentState.reserva.registro) return this.registro.show()
   }
 
   componentDidMount () {
@@ -46,7 +46,11 @@ export default class Disponibildad extends React.Component {
       // onSelect: this.fechaSalidaSeleccionada.bind(this)
     })
 
-    this.reserva = this.props.reservaState
+    this.reserva = this.props.parentState.reserva
+  }
+
+  componentDidUpdate () {
+    console.log('Disponibilidad component', this.props.parentState.habitaciones)
   }
 
   render () {
@@ -54,11 +58,11 @@ export default class Disponibildad extends React.Component {
       <section className='disponibilidad  flex'>
         <b className='one legend'>Verificar disponibilidad</b>
         <fieldset className='one-half'>
-          <input id='registro' type='text' name='registro' required autoComplete='false' />
+          <input id='registro' type='text' name='registro' required autoComplete='false' disabled={this.props.parentState.habitaciones} />
           <label htmlFor='registro'>registro</label>
         </fieldset>
         <fieldset className='one-half'>
-          <input id='salida' type='text' name='salida' required autoComplete='false' />
+          <input id='salida' type='text' name='salida' required autoComplete='false' disabled={this.props.parentState.habitaciones}/>
           <label htmlFor='salida'>salida</label>
         </fieldset>
         <fieldset className='one'>

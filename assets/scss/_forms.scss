@@ -34,33 +34,38 @@ form {
     border-radius: 3px;
     color: var(--input-text-color);
     outline: none;
-    padding: 14px 10px 6px;
+    padding: 10px 10px 6px;
     width: 100%;
-    &:valid + label, &:focus + label {
-      font-size: 12px;
-      top: 0;
+    &:disabled {
+      color: color(var(--input-text-color) whiteness(80%));
     }
     &:focus {
       box-shadow: 0px 0px 2px 1px #c0d3e0;
     }
+    &:valid + label, &:disabled + label, &:focus + label {
+      font-size: 12px;
+      top: 0;
+    }
+    &:disabled + label {
+      color: color(var(--input-text-color) whiteness(80%));
+    }
   }
   & button, & input[type=submit] {
     background-color: #FF5A5F;
-    padding: 12px 8px;
     border: 0;
     border-radius: 3px;
     color: #fff;
+    font-size: 14px;
     font-weight: 700;
+    min-width: 10rem;
+    padding: 12px 8px;
     text-align: center;
     &:disabled {
       background-color: color(#FF5A5F whiteness(55%))
     }
   }
-  & option {
-    line-height: 1rem;
-  }
-  & .footer {
-    flex-basis: 100%;
+
+  .footer {
     text-align: right;
   }
 }

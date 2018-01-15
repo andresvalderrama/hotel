@@ -217,7 +217,8 @@ body {
   background: #fff;
   font: 400 16px/1.5 'Arial', sans-serif;
   font: 400 1rem/1.5 'Arial', sans-serif;
-  margin: 0 auto;
+  margin: 0 auto 64px;
+  margin: 0 auto 4rem;
   max-width: 430px;
 }
 pre {
@@ -266,36 +267,39 @@ form input[type=text], form select {
     border-radius: 3px;
     color: #484848;
     outline: none;
-    padding: 14px 10px 6px;
+    padding: 10px 10px 6px;
     width: 100%
 }
-form input[type=text]:valid + label, form input[type=text]:focus + label, form select:valid + label, form select:focus + label {
-    font-size: 12px;
-    top: 0;
+form input[type=text]:disabled, form select:disabled {
+    color: rgb(134, 134, 134);
 }
 form input[type=text]:focus, form select:focus {
     -webkit-box-shadow: 0px 0px 2px 1px #c0d3e0;
             box-shadow: 0px 0px 2px 1px #c0d3e0;
 }
+form input[type=text]:valid + label, form input[type=text]:disabled + label, form input[type=text]:focus + label, form select:valid + label, form select:disabled + label, form select:focus + label {
+    font-size: 12px;
+    top: 0;
+}
+form input[type=text]:disabled + label, form select:disabled + label {
+    color: rgb(134, 134, 134);
+}
 form button, form input[type=submit] {
     background-color: #FF5A5F;
-    padding: 12px 8px;
     border: 0;
     border-radius: 3px;
     color: #fff;
+    font-size: 14px;
     font-weight: 700;
+    min-width: 160px;
+    min-width: 10rem;
+    padding: 12px 8px;
     text-align: center
 }
 form button:disabled, form input[type=submit]:disabled {
     background-color: rgb(255, 140, 144)
 }
-form option {
-    line-height: 16px;
-    line-height: 1rem;
-}
 form .footer {
-    -ms-flex-preferred-size: 100%;
-        flex-basis: 100%;
     text-align: right;
 }
 .flex {
@@ -321,8 +325,11 @@ form .footer {
 /* Pages */
 html.home section.disponibilidad {
     border-radius: 3px;
-    margin: 0 0 48px;
-    margin: 0 0 3rem;
+    margin-bottom: 48px;
+    margin-bottom: 3rem;
+}
+html.home section.habitaciones {
+    margin-bottom: 3px
 }
 html.home section.habitaciones label {
     border: 1px solid #dcdcdc;
@@ -356,4 +363,22 @@ html.home section.habitaciones input[type="radio"]:checked + label {
     border-color: #008489;
     color: #fff;
     color: #fff;
+}
+html.home section.huespedes {
+    counter-reset: section
+}
+html.home section.huespedes .huesped {
+    position: relative;
+    margin-bottom: 30px;
+}
+html.home section.huespedes .huesped .counter {
+        font-size: 14px;
+        font-weight: 700;
+        padding: 8px 0;
+        position: absolute;
+        right: calc(100% + 14px)
+}
+html.home section.huespedes .huesped .counter:before {
+    counter-increment: section;
+    content: counter(section);
 }

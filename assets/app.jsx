@@ -14,9 +14,11 @@ class App extends React.Component {
 
     this.state = {
       reserva: {},
+      makingRequest: false
     }
 
     this.huespedesSeleccionados = this.huespedesSeleccionados.bind(this)
+    this.guardarHuesped = this.guardarHuesped.bind(this)
   }
 
   actualizarFechaRegistro (fechaSalida) {
@@ -24,7 +26,6 @@ class App extends React.Component {
       reserva: {
         registro: fechaSalida ? fechaSalida.getTime() : this.state.reserva.registro,
         salida: this.state.reserva.salida,
-        huespedes: this.state.reserva.huespedes,
         habitacion: this.state.reserva.habitacion
       }
     })
@@ -35,23 +36,28 @@ class App extends React.Component {
       reserva: {
         registro: this.state.reserva.registro,
         salida: fechaSalida ? fechaSalida.getTime() : this.state.reserva.salida,
-        huespedes: this.state.reserva.huespedes,
         habitacion: this.state.reserva.habitacion
       }
     })
   }
 
   huespedesSeleccionados (event) {
+    let numeroDeHuespedes = Number(event.target.value)
+    let huespedesArray = Array(numeroDeHuespedes)
+
+    for (let i = 0; i < huespedesArray.length; i++) {
+      huespedesArray[i] = {}
+    }
+
     this.setState({
       reserva: {
         registro: this.state.reserva.registro,
         salida: this.state.reserva.salida,
-        huespedes: event.target.value ? event.target.value : this.state.reserva.huespedes,
         habitacion: this.state.reserva.habitacion
-      }
+      },
+      huespedes: huespedesArray.length > 0 ? huespedesArray : this.state.reserva.huespedes,
+      makingRequest: true
     })
-
-    this.fakeRequest()
   }
 
   habitacionSeleccionada (event) {
@@ -59,9 +65,9 @@ class App extends React.Component {
       reserva: {
         registro: this.state.reserva.registro,
         salida: this.state.reserva.salida,
-        huespedes: this.state.reserva.huespedes,
-        habitacion: event.target.value ? event.target.value : this.state.reserva.habitacion
-      }
+        habitacion: event.target.value ? Number(event.target.value) : this.state.reserva.habitacion
+      },
+      huespedes: this.state.huespedes
     })
   }
 
@@ -71,31 +77,45 @@ class App extends React.Component {
         habitaciones: [
           {
             id: 1,
-            numero: 104
+            numero: 104,
+            tipo: 'standard'
           },
           {
             id: 2,
-            numero: 202
+            numero: 202,
+            tipo: 'preferencial'
           },
           {
             id: 3,
-            numero: 204
+            numero: 204,
+            tipo: 'preferencial'
           },
           {
             id: 4,
-            numero: 304
+            numero: 304,
+            tipo: 'suite'
           },
           {
             id: 5,
-            numero: 305
+            numero: 305,
+            tipo: 'suite'
           }
-        ]
+        ],
+        makingRequest: false
       })
-    }, 1500)
+    }, 200)
+  }
+
+  guardarHuesped (huespedes) {
+    console.log('guarder huespedes', huespedes)
   }
 
   componentDidUpdate () {
     console.log('App state', this.state)
+
+    if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
+      this.fakeRequest()
+    }
   }
 
   render () {
@@ -103,17 +123,17 @@ class App extends React.Component {
       <form action='/reserva/crear' method='post'>
         <h2>Reservas</h2>
         <Disponibilidad
-          reservaState={this.state.reserva}
-          makingRequest={this.state.makingRequest}
+          parentState={this.state}
           actualizarFechaRegistro={this.actualizarFechaRegistro.bind(this)}
           actualizarFechaSalida={this.actualizarFechaSalida.bind(this)}
           huespedesSeleccionados={this.huespedesSeleccionados.bind(this)}
         />
         {this.state.habitaciones
-          ? <Habitaciones habitacionesState={this.state.habitaciones} habitacionSeleccionada={this.habitacionSeleccionada.bind(this)} />
+          ? <Habitaciones parentState={this.state} habitacionSeleccionada={this.habitacionSeleccionada.bind(this)} />
           : '' }
         {this.state.habitaciones && this.state.reserva.habitacion
-          ? <Huespedes />
+          ? <Huespedes parentState={this.state}
+            guardarHuesped={this.guardarHuesped} />
           : ''}
       </form>
     </div>)
