@@ -20,6 +20,7 @@ class App extends React.Component {
 
     this.huespedesSeleccionados = this.huespedesSeleccionados.bind(this)
     this.guardarHuesped = this.guardarHuesped.bind(this)
+    this.reservar = this.reservar.bind(this)
   }
 
   actualizarFechaRegistro (fechaSalida) {
@@ -73,41 +74,6 @@ class App extends React.Component {
     })
   }
 
-  fakeRequest () {
-    setTimeout(() => {
-      this.setState({
-        habitaciones: [
-          {
-            id: 1,
-            numero: 104,
-            tipo: 'standard'
-          },
-          {
-            id: 2,
-            numero: 202,
-            tipo: 'preferencial'
-          },
-          {
-            id: 3,
-            numero: 204,
-            tipo: 'preferencial'
-          },
-          {
-            id: 4,
-            numero: 304,
-            tipo: 'suite'
-          },
-          {
-            id: 5,
-            numero: 305,
-            tipo: 'suite'
-          }
-        ],
-        makingRequest: false
-      })
-    }, 200)
-  }
-
   guardarHuesped (huespedes) {
     this.setState({
       huespedes: huespedes
@@ -118,7 +84,6 @@ class App extends React.Component {
     console.log('App state', this.state)
 
     if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
-      // this.fakeRequest()
       axios.post('/api/v1/reservas', this.state.reserva)
         .then(response => {
           this.setState({
@@ -130,9 +95,17 @@ class App extends React.Component {
     }
   }
 
+  reservar (event) {
+    event.preventDefault()
+
+    axios.post('/api/v1/reservas/crear', this.state)
+      .then(response => console.log(response))
+      .catch(error => console.error(error))
+  }
+
   render () {
     return (<div>
-      <form action='/reserva/crear' method='post'>
+      <form action='api/v1/reservas/crear' method='post' onSubmit={this.reservar}>
         <h2>Reservas</h2>
         <Disponibilidad
           parentState={this.state}

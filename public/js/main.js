@@ -17196,6 +17196,7 @@ var App = function (_React$Component) {
 
     _this.huespedesSeleccionados = _this.huespedesSeleccionados.bind(_this);
     _this.guardarHuesped = _this.guardarHuesped.bind(_this);
+    _this.reservar = _this.reservar.bind(_this);
     return _this;
   }
 
@@ -17255,38 +17256,6 @@ var App = function (_React$Component) {
       });
     }
   }, {
-    key: 'fakeRequest',
-    value: function fakeRequest() {
-      var _this2 = this;
-
-      setTimeout(function () {
-        _this2.setState({
-          habitaciones: [{
-            id: 1,
-            numero: 104,
-            tipo: 'standard'
-          }, {
-            id: 2,
-            numero: 202,
-            tipo: 'preferencial'
-          }, {
-            id: 3,
-            numero: 204,
-            tipo: 'preferencial'
-          }, {
-            id: 4,
-            numero: 304,
-            tipo: 'suite'
-          }, {
-            id: 5,
-            numero: 305,
-            tipo: 'suite'
-          }],
-          makingRequest: false
-        });
-      }, 200);
-    }
-  }, {
     key: 'guardarHuesped',
     value: function guardarHuesped(huespedes) {
       this.setState({
@@ -17296,14 +17265,13 @@ var App = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      var _this3 = this;
+      var _this2 = this;
 
       console.log('App state', this.state);
 
       if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
-        // this.fakeRequest()
         _axios2.default.post('/api/v1/reservas', this.state.reserva).then(function (response) {
-          _this3.setState({
+          _this2.setState({
             habitaciones: response.data,
             makingRequest: false
           });
@@ -17313,6 +17281,17 @@ var App = function (_React$Component) {
       }
     }
   }, {
+    key: 'reservar',
+    value: function reservar(event) {
+      event.preventDefault();
+
+      _axios2.default.post('/api/v1/reservas/crear', this.state).then(function (response) {
+        return console.log(response);
+      }).catch(function (error) {
+        return console.error(error);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -17320,7 +17299,7 @@ var App = function (_React$Component) {
         null,
         _react2.default.createElement(
           'form',
-          { action: '/reserva/crear', method: 'post' },
+          { action: 'api/v1/reservas/crear', method: 'post', onSubmit: this.reservar },
           _react2.default.createElement(
             'h2',
             null,

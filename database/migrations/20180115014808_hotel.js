@@ -9,8 +9,8 @@ exports.up = (knex, Promise) => {
     })
     .createTable('reservaciones', table => {
       table.increments('id').primary().notNullable()
-      table.integer('registro').notNullable()
-      table.integer('salida').notNullable()
+      table.string('registro')
+      table.string('salida')
       table.integer('habitacion_id').unsigned()
 
       table.foreign('habitacion_id')
@@ -18,8 +18,19 @@ exports.up = (knex, Promise) => {
     })
 }
 
+/*
+knex('users')
+.select(knex.raw('count(*) as user_count, status'))
+.where(knex.raw(1))
+.orWhere(knex.raw('status <> ?', [1]))
+.groupBy('status')
+Outputs:
+select count(*) as user_count, status from `users` where 1 or status <> 1 group by `status`
+*/
+
+
 exports.down = (knex, Promise) => {
   return knex.schema
-    .dropTableIfExists('habitaciones')
     .dropTableIfExists('reservaciones')
+    .dropTableIfExists('habitaciones')
 }
