@@ -49,10 +49,6 @@ export default class Disponibildad extends React.Component {
     this.reserva = this.props.parentState.reserva
   }
 
-  componentDidUpdate () {
-    console.log('Disponibilidad component', this.props.parentState.habitaciones)
-  }
-
   render () {
     return (<div>
       <section className='disponibilidad  flex'>

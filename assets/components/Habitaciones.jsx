@@ -7,7 +7,11 @@ export default class Habitaciones extends React.Component {
 
   filtrarHabitaciones () {
     this.habitacionesFiltradas = this.props.parentState.habitaciones.filter(habitacion => {
-      return this.props.parentState.huespedes.length > 2 && habitacion.numero_habitacion > 200
+      if (this.props.parentState.huespedes.length > 2) {
+        return habitacion.numero_habitacion > 200
+      } else {
+        return true
+      }
     })
   }
 
@@ -15,8 +19,8 @@ export default class Habitaciones extends React.Component {
     this.filtrarHabitaciones()
   }
 
-  componentDidMount () {
-    console.log(this.habitacionesFiltradas)
+  componentDidUpdate () {
+    this.filtrarHabitaciones()
   }
 
   render () {

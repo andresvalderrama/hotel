@@ -57,7 +57,7 @@ class App extends React.Component {
         salida: this.state.reserva.salida,
         habitacion: this.state.reserva.habitacion
       },
-      huespedes: huespedesArray.length > 0 ? huespedesArray : this.state.reserva.huespedes,
+      huespedes: huespedesArray.length > 0 ? huespedesArray : this.state.huespedes,
       makingRequest: true
     })
   }

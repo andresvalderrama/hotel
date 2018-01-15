@@ -17238,7 +17238,7 @@ var App = function (_React$Component) {
           salida: this.state.reserva.salida,
           habitacion: this.state.reserva.habitacion
         },
-        huespedes: huespedesArray.length > 0 ? huespedesArray : this.state.reserva.huespedes,
+        huespedes: huespedesArray.length > 0 ? huespedesArray : this.state.huespedes,
         makingRequest: true
       });
     }
@@ -34729,11 +34729,6 @@ var Disponibildad = function (_React$Component) {
       this.reserva = this.props.parentState.reserva;
     }
   }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      console.log('Disponibilidad component', this.props.parentState.habitaciones);
-    }
-  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -36390,7 +36385,11 @@ var Habitaciones = function (_React$Component) {
       var _this2 = this;
 
       this.habitacionesFiltradas = this.props.parentState.habitaciones.filter(function (habitacion) {
-        return _this2.props.parentState.huespedes.length > 2 && habitacion.numero_habitacion > 200;
+        if (_this2.props.parentState.huespedes.length > 2) {
+          return habitacion.numero_habitacion > 200;
+        } else {
+          return true;
+        }
       });
     }
   }, {
@@ -36399,9 +36398,9 @@ var Habitaciones = function (_React$Component) {
       this.filtrarHabitaciones();
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log(this.habitacionesFiltradas);
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      this.filtrarHabitaciones();
     }
   }, {
     key: 'render',
