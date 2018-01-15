@@ -228,6 +228,10 @@ pre {
 }
 a {
   text-decoration: none;
+  color: #FF5A5F;
+}
+.right {
+  text-align: right;
 }
 form fieldset {
     border: 0;
@@ -359,6 +363,12 @@ html.home section.disponibilidad {
 html.home section.habitaciones {
     margin-bottom: 3px
 }
+html.home section.habitaciones fieldset.preferencial label {
+    color: #5c7dff;
+}
+html.home section.habitaciones fieldset.suite label {
+    color: #ff5c5e;
+}
 html.home section.habitaciones label {
     border: 1px solid #dcdcdc;
     border-radius: 3px;
@@ -392,8 +402,17 @@ html.home section.habitaciones input[type="radio"]:checked + label {
     color: #fff;
     color: #fff;
 }
+html.home section.habitaciones span {
+    position: absolute;
+    top: -8px;
+    font-size: 10px;
+    left: 10px;
+    background: #fff;
+    display: inline-block;
+}
 html.home section.huespedes {
-    counter-reset: section
+    counter-reset: section;
+    margin-bottom: 3px
 }
 html.home section.huespedes .huesped {
     position: relative;

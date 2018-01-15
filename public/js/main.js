@@ -36403,14 +36403,20 @@ var Habitaciones = function (_React$Component) {
           this.props.parentState.habitaciones.map(function (habitacion) {
             return _react2.default.createElement(
               'fieldset',
-              { key: habitacion.id },
+              { key: habitacion.id, 'class': habitacion.tipo },
               _react2.default.createElement('input', { type: 'radio', name: 'habitacion', value: habitacion.id, id: 'habitacion-' + habitacion.numero_habitacion, required: true,
                 onChange: _this2.props.habitacionSeleccionada }),
               _react2.default.createElement(
                 'label',
                 { htmlFor: 'habitacion-' + habitacion.numero_habitacion },
                 'habitacion ',
-                habitacion.numero_habitacion
+                habitacion.numero_habitacion,
+                ' ',
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  habitacion.tipo
+                )
               )
             );
           })

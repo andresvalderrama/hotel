@@ -5,6 +5,14 @@ html.home {
   }
   & section.habitaciones {
     margin-bottom: 3px;
+    & fieldset {
+      &.preferencial label {
+        color: #5c7dff;
+      }
+      &.suite label {
+        color: #ff5c5e;
+      }
+    }
     & label {
       border: 1px solid #dcdcdc;
       border-radius: 3px;
@@ -30,9 +38,18 @@ html.home {
       border-color: #008489;
       color: var(--white, #fff);
     }
+    & span {
+      position: absolute;
+      top: -8px;
+      font-size: 10px;
+      left: 10px;
+      background: #fff;
+      display: inline-block;
+    }
   }
   & section.huespedes {
     counter-reset: section;
+    margin-bottom: 3px;
     & .huesped {
       position: relative;
       margin-bottom: 30px;
