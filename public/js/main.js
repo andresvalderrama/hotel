@@ -17256,6 +17256,20 @@ var App = function (_React$Component) {
       });
     }
   }, {
+    key: 'habitacionesDisponibles',
+    value: function habitacionesDisponibles() {
+      var _this2 = this;
+
+      _axios2.default.post('/api/v1/reservas', this.state).then(function (response) {
+        _this2.setState({
+          habitaciones: response.data,
+          makingRequest: false
+        });
+      }).catch(function (error) {
+        return console.error(error);
+      });
+    }
+  }, {
     key: 'guardarHuesped',
     value: function guardarHuesped(huespedes) {
       this.setState({
@@ -17263,33 +17277,24 @@ var App = function (_React$Component) {
       });
     }
   }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      var _this2 = this;
-
-      console.log('App state', this.state);
-
-      if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
-        _axios2.default.post('/api/v1/reservas', this.state).then(function (response) {
-          _this2.setState({
-            habitaciones: response.data,
-            makingRequest: false
-          });
-        }).catch(function (error) {
-          return console.error(error);
-        });
-      }
-    }
-  }, {
     key: 'reservar',
     value: function reservar(event) {
       event.preventDefault();
 
       _axios2.default.post('/api/v1/reservas/crear', this.state).then(function (response) {
-        return console.log(response);
+        window.location.replace('/reserva/creada');
       }).catch(function (error) {
         return console.error(error);
       });
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      console.log('App state', this.state);
+
+      if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
+        this.habitacionesDisponibles();
+      }
     }
   }, {
     key: 'render',

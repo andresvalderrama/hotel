@@ -74,33 +74,39 @@ class App extends React.Component {
     })
   }
 
+  habitacionesDisponibles () {
+    axios.post('/api/v1/reservas', this.state)
+      .then(response => {
+        this.setState({
+          habitaciones: response.data,
+          makingRequest: false
+        })
+      })
+      .catch(error => console.error(error))
+  }
+
   guardarHuesped (huespedes) {
     this.setState({
       huespedes: huespedes
     })
   }
 
-  componentDidUpdate () {
-    console.log('App state', this.state)
-
-    if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
-      axios.post('/api/v1/reservas', this.state)
-        .then(response => {
-          this.setState({
-            habitaciones: response.data,
-            makingRequest: false
-          })
-        })
-        .catch(error => console.error(error))
-    }
-  }
-
   reservar (event) {
     event.preventDefault()
 
     axios.post('/api/v1/reservas/crear', this.state)
-      .then(response => console.log(response))
+      .then(response => {
+        window.location.replace('/reserva/creada')
+      })
       .catch(error => console.error(error))
+  }
+
+  componentDidUpdate () {
+    console.log('App state', this.state)
+
+    if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
+      this.habitacionesDisponibles()
+    }
   }
 
   render () {
