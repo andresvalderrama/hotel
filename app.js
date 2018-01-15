@@ -1,13 +1,15 @@
-var path = require('path')
+const path = require('path')
 
-var express = require('express')
-var logger = require('morgan')
-var bodyParser = require('body-parser')
+const express = require('express')
+const logger = require('morgan')
+const bodyParser = require('body-parser')
 const hbs = require('express-hbs')
 
-var index = require('./routes/index')
+const server = require('./routes/server')
+const api = require('./routes/api')
 
-var app = express()
+require('./database/connection')
+const app = express()
 
 app.engine('hbs', hbs.express4({
   partialsDir: path.join(__dirname, 'views/partials'),
@@ -23,7 +25,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', index)
+app.use('/api/v1/', api)
+app.use('/', server)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
