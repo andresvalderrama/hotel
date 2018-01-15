@@ -1,0 +1,17 @@
+header#header {
+  align-items: center;
+  background:var(--brand-color);
+  display: flex;
+  justify-content: center;
+  height: 2.5rem;
+  left: 0;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+
+  & a {
+    color: #fff;
+    font-weight: bold;
+  }
+}

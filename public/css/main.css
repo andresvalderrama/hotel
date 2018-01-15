@@ -214,15 +214,20 @@ html {
   font-size: 16px;
 }
 body {
-  background: #fff;
+  background: #fdfdfd;
   font: 400 16px/1.5 'Arial', sans-serif;
   font: 400 1rem/1.5 'Arial', sans-serif;
   margin: 0 auto 64px;
   margin: 0 auto 4rem;
   max-width: 430px;
+  padding: 48px 0 0;
+  padding: 3rem 0 0;
 }
 pre {
   white-space: normal;
+}
+a {
+  text-decoration: none;
 }
 form fieldset {
     border: 0;
@@ -321,6 +326,29 @@ form .footer {
   width: calc(50% - 8px);
   -ms-flex-preferred-size: calc(50% - 8px);
       flex-basis: calc(50% - 8px);
+}
+header#header {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background:#FF5A5F;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 40px;
+  height: 2.5rem;
+  left: 0;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%
+}
+header#header a {
+    color: #fff;
+    font-weight: bold;
 }
 /* Pages */
 html.home section.disponibilidad {
