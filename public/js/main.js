@@ -17169,6 +17169,10 @@ var _Huespedes = __webpack_require__(153);
 
 var _Huespedes2 = _interopRequireDefault(_Huespedes);
 
+var _PrecioReserva = __webpack_require__(185);
+
+var _PrecioReserva2 = _interopRequireDefault(_PrecioReserva);
+
 var _Reservar = __webpack_require__(154);
 
 var _Reservar2 = _interopRequireDefault(_Reservar);
@@ -17236,7 +17240,8 @@ var App = function (_React$Component) {
         reserva: {
           registro: this.state.reserva.registro,
           salida: this.state.reserva.salida,
-          habitacion: this.state.reserva.habitacion
+          habitacion: this.state.reserva.habitacion,
+          tipo_habitacion: this.state.reserva.tipo_habitacion
         },
         huespedes: huespedesArray.length > 0 ? huespedesArray : this.state.huespedes,
         makingRequest: true
@@ -17249,7 +17254,8 @@ var App = function (_React$Component) {
         reserva: {
           registro: this.state.reserva.registro,
           salida: this.state.reserva.salida,
-          habitacion: event.target.value ? Number(event.target.value) : this.state.reserva.habitacion
+          habitacion: event.target.value ? Number(event.target.value) : this.state.reserva.habitacion,
+          tipo_habitacion: event.target.dataset.tipo ? event.target.dataset.tipo : this.state.reserva.tipo_habitacion
         },
         huespedes: this.state.huespedes,
         reservar: true
@@ -17290,8 +17296,8 @@ var App = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      console.clear();
-      console.log('App state', this.state);
+      // console.clear()
+      // console.log('App state', this.state)
 
       if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
         this.habitacionesDisponibles();
@@ -17307,10 +17313,11 @@ var App = function (_React$Component) {
           'form',
           { action: 'api/v1/reservas/crear', method: 'post', onSubmit: this.reservar },
           _react2.default.createElement(
-            'h2',
-            null,
-            'Reservas'
+            'h3',
+            { style: { marginButton: 0 } },
+            'Reserva'
           ),
+          this.state.habitaciones && this.state.reserva.habitacion ? _react2.default.createElement(_PrecioReserva2.default, { parentState: this.state }) : '',
           _react2.default.createElement(_Disponibilidad2.default, {
             parentState: this.state,
             actualizarFechaRegistro: this.actualizarFechaRegistro.bind(this),
@@ -36423,7 +36430,7 @@ var Habitaciones = function (_React$Component) {
             return _react2.default.createElement(
               'fieldset',
               { key: habitacion.id, className: habitacion.tipo },
-              _react2.default.createElement('input', { type: 'radio', name: 'habitacion', value: habitacion.id, id: 'habitacion-' + habitacion.numero_habitacion, required: true,
+              _react2.default.createElement('input', { type: 'radio', name: 'habitacion', value: habitacion.id, id: 'habitacion-' + habitacion.numero_habitacion, 'data-tipo': habitacion.tipo, required: true,
                 onChange: _this3.props.habitacionSeleccionada }),
               _react2.default.createElement(
                 'label',
@@ -38235,6 +38242,455 @@ module.exports = function spread(callback) {
     return callback.apply(null, arr);
   };
 };
+
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _stickybits = __webpack_require__(186);
+
+var _stickybits2 = _interopRequireDefault(_stickybits);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PrecioReserva = function (_React$Component) {
+  _inherits(PrecioReserva, _React$Component);
+
+  function PrecioReserva(props) {
+    _classCallCheck(this, PrecioReserva);
+
+    var _this = _possibleConstructorReturn(this, (PrecioReserva.__proto__ || Object.getPrototypeOf(PrecioReserva)).call(this));
+
+    _this.state = {
+      suite: [50000, 75000, 100000, 125000],
+      preferencial: [40000, 60000, 80000, 100000],
+      standard: [30000, 50000]
+    };
+    return _this;
+  }
+
+  _createClass(PrecioReserva, [{
+    key: 'obtenerPrecioReserva',
+    value: function obtenerPrecioReserva() {
+      var _this2 = this;
+
+      var tipoHabitacion = this.props.parentState.reserva.tipo_habitacion;
+      var cantHuespedes = this.props.parentState.huespedes.length;
+
+      var total = function total() {
+        if (_this2.state[tipoHabitacion].length >= cantHuespedes) {
+          return _this2.state[tipoHabitacion][cantHuespedes - 1] * cantHuespedes;
+        } else {
+          return 'seleccione una habitacion';
+        }
+      };
+
+      return total();
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      (0, _stickybits2.default)('.precio-reserva', { stickyBitStickyOffset: 40 });
+      console.log('PrecioReserva componentDidMount', this.state);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'section',
+        { className: 'precio-reserva' },
+        'Precio: ',
+        _react2.default.createElement(
+          'b',
+          null,
+          this.obtenerPrecioReserva()
+        )
+      );
+    }
+  }]);
+
+  return PrecioReserva;
+}(_react2.default.Component);
+
+exports.default = PrecioReserva;
+
+/***/ }),
+/* 186 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/*
+  STICKYBITS 💉
+  --------
+  > a lightweight alternative to `position: sticky` polyfills 🍬
+  --------
+  - each method is documented above it our view the readme
+  - Stickybits does not manage polymorphic functionality (position like properties)
+  * polymorphic functionality: (in the context of describing Stickybits)
+    means making things like `position: sticky` be loosely supported with position fixed.
+    It also means that features like `useStickyClasses` takes on styles like `position: fixed`.
+  --------
+  defaults 🔌
+  --------
+  - version = `package.json` version
+  - userAgent = viewer browser agent
+  - target = DOM element selector
+  - noStyles = boolean
+  - offset = number
+  - parentClass = 'string'
+  - scrollEl = window || DOM element selector
+  - stickyClass = 'string'
+  - stuckClass = 'string'
+  - useStickyClasses = boolean
+  - verticalPosition = 'string'
+  --------
+  props🔌
+  --------
+  - p = props {object}
+  --------
+  instance note
+  --------
+  - stickybits parent methods return this
+  - stickybits instance methods return an instance item
+  --------
+  nomenclature
+  --------
+  - target => el => e
+  - props => o || p
+  - instance => item => it
+  --------
+  methods
+  --------
+  - .definePosition = defines sticky or fixed
+  - .addInstance = an array of objects for each Stickybits Target
+  - .getClosestParent = gets the parent for non-window scroll
+  - .computeScrollOffsets = computes scroll position
+  - .toggleClasses = older browser toggler
+  - .manageState = manages sticky state
+  - .removeClass = older browser support class remover
+  - .removeInstance = removes an instance
+  - .cleanup = removes all Stickybits instances and cleans up dom from stickybits
+*/
+function Stickybits(target, obj) {
+  var o = typeof obj !== 'undefined' ? obj : {};
+  this.version = '2.0.13';
+  this.userAgent = window.navigator.userAgent || 'no `userAgent` provided by the browser';
+  this.props = {
+    noStyles: o.noStyles || false,
+    stickyBitStickyOffset: o.stickyBitStickyOffset || 0,
+    parentClass: o.parentClass || 'js-stickybit-parent',
+    scrollEl: o.scrollEl || window,
+    stickyClass: o.stickyClass || 'js-is-sticky',
+    stuckClass: o.stuckClass || 'js-is-stuck',
+    useStickyClasses: o.useStickyClasses || false,
+    verticalPosition: o.verticalPosition || 'top'
+  };
+  var p = this.props;
+  /*
+    define positionVal
+    ----
+    -  uses a computed (`.definePosition()`)
+    -  defined the position
+  */
+  p.positionVal = this.definePosition() || 'fixed';
+  var vp = p.verticalPosition;
+  var ns = p.noStyles;
+  var pv = p.positionVal;
+  this.els = typeof target === 'string' ? document.querySelectorAll(target) : target;
+  if (!('length' in this.els)) this.els = [this.els];
+  this.instances = [];
+  for (var i = 0; i < this.els.length; i += 1) {
+    var el = this.els[i];
+    var styles = el.style;
+    if (vp === 'top' && !ns) styles[vp] = p.stickyBitStickyOffset + 'px';
+    if (pv !== 'fixed' && p.useStickyClasses === false) {
+      styles.position = pv;
+    } else {
+      // const stickyManager = new ManageSticky(el, p)
+      if (pv !== 'fixed') styles.position = pv;
+      var instance = this.addInstance(el, p);
+      // instances are an array of objects
+      this.instances.push(instance);
+    }
+  }
+  return this;
+}
+
+/*
+  setStickyPosition ✔️
+  --------
+  —  most basic thing stickybits does
+  => checks to see if position sticky is supported
+  => defined the position to be used
+  => stickybits works accordingly
+*/
+Stickybits.prototype.definePosition = function () {
+  var prefix = ['', '-o-', '-webkit-', '-moz-', '-ms-'];
+  var test = document.head.style;
+  for (var i = 0; i < prefix.length; i += 1) {
+    test.position = prefix[i] + 'sticky';
+  }
+  var stickyProp = 'fixed';
+  if (typeof test.position !== 'undefined') stickyProp = test.position;
+  test.position = '';
+  return stickyProp;
+};
+
+/*
+  addInstance ✔️
+  --------
+  — manages instances of items
+  - takes in an el and props
+  - returns an item object
+  ---
+  - target = el
+  - o = {object} = props
+    - scrollEl = 'string'
+    - verticalPosition = number
+    - off = boolean
+    - parentClass = 'string'
+    - stickyClass = 'string'
+    - stuckClass = 'string'
+  ---
+  - defined later
+    - parent = dom element
+    - state = 'string'
+    - offset = number
+    - stickyStart = number
+    - stickyStop = number
+  - returns an instance object
+*/
+Stickybits.prototype.addInstance = function addInstance(el, props) {
+  var _this = this;
+
+  var item = {
+    el: el,
+    parent: el.parentNode,
+    props: props
+  };
+  var p = item.props;
+  item.parent.className += ' ' + props.parentClass;
+  var se = p.scrollEl;
+  item.isWin = se === window;
+  if (!item.isWin) se = this.getClosestParent(item.el, se);
+  this.computeScrollOffsets(item);
+  item.state = 'default';
+  item.stateContainer = function () {
+    _this.manageState(item);
+  };
+  se.addEventListener('scroll', item.stateContainer);
+  return item;
+};
+
+/*
+  --------
+  getParent 👨‍
+  --------
+  - a helper function that gets the target element's parent selected el
+  - only used for non `window` scroll elements
+  - supports older browsers
+*/
+Stickybits.prototype.getClosestParent = function getClosestParent(el, matchSelector) {
+  // p = parent element
+  var p = document.querySelector(matchSelector);
+  var e = el;
+  if (e.parentElement === p) return p;
+  // traverse up the dom tree until we get to the parent
+  while (e.parentElement !== p) {
+    e = e.parentElement;
+  } // return parent element
+  return p;
+};
+
+/*
+  computeScrollOffsets 📊
+  ---
+  computeScrollOffsets for Stickybits
+  - defines
+    - offset
+    - start
+    - stop
+*/
+Stickybits.prototype.computeScrollOffsets = function computeScrollOffsets(item) {
+  var it = item;
+  var p = it.props;
+  var parent = it.parent;
+  var iw = it.isWin;
+  var scrollElOffset = 0;
+  var stickyStart = parent.getBoundingClientRect().top;
+  if (!iw && p.positionVal === 'fixed') {
+    scrollElOffset = p.scrollEl.getBoundingClientRect().top;
+    stickyStart = parent.getBoundingClientRect().top - scrollElOffset;
+  }
+  it.offset = scrollElOffset + p.stickyBitStickyOffset;
+  it.stickyStart = stickyStart - it.offset;
+  it.stickyStop = stickyStart + parent.offsetHeight - (it.el.offsetHeight + it.offset);
+  return it;
+};
+
+/*
+  toggleClasses ⚖️
+  ---
+  toggles classes (for older browser support)
+  r = removed class
+  a = added class
+*/
+Stickybits.prototype.toggleClasses = function toggleClasses(el, r, a) {
+  var e = el;
+  var cArray = e.className.split(' ');
+  if (a && cArray.indexOf(a) === -1) cArray.push(a);
+  var rItem = cArray.indexOf(r);
+  if (rItem !== -1) cArray.splice(rItem, 1);
+  e.className = cArray.join(' ');
+};
+
+/*
+  manageState 📝
+  ---
+  - defines the state
+    - normal
+    - sticky
+    - stuck
+*/
+Stickybits.prototype.manageState = function manageState(item) {
+  // cache object
+  var it = item;
+  var e = it.el;
+  var p = it.props;
+  var state = it.state;
+  var start = it.stickyStart;
+  var stop = it.stickyStop;
+  var stl = e.style;
+  // cache props
+  var ns = p.noStyles;
+  var pv = p.positionVal;
+  var se = p.scrollEl;
+  var sticky = p.stickyClass;
+  var stuck = p.stuckClass;
+  var vp = p.verticalPosition;
+  /*
+    requestAnimationFrame
+    ---
+    - use rAF
+    - or stub rAF
+  */
+  var rAF = se.requestAnimationFrame;
+  if (!it.isWin || typeof rAF === 'undefined') {
+    rAF = function rAFDummy(f) {
+      f();
+    };
+  }
+  /*
+    define scroll vars
+    ---
+    - scroll
+    - notSticky
+    - isSticky
+    - isStuck
+  */
+  var tC = this.toggleClasses;
+  var scroll = it.isWin ? se.scrollY || se.pageYOffset : se.scrollTop;
+  var notSticky = scroll > start && scroll < stop && (state === 'default' || state === 'stuck');
+  var isSticky = scroll <= start && state === 'sticky';
+  var isStuck = scroll >= stop && state === 'sticky';
+  /*
+    Unnamed arrow functions within this block
+    ---
+    - help wanted or discussion
+    - view test.stickybits.js
+      - `stickybits .manageState  `position: fixed` interface` for more awareness 👀
+  */
+  if (notSticky) {
+    it.state = 'sticky';
+    rAF(function () {
+      tC(e, stuck, sticky);
+      stl.position = pv;
+      if (ns) return;
+      stl.bottom = '';
+      stl[vp] = p.stickyBitStickyOffset + 'px';
+    });
+  } else if (isSticky) {
+    it.state = 'default';
+    rAF(function () {
+      tC(e, sticky);
+      if (pv === 'fixed') stl.position = '';
+    });
+  } else if (isStuck) {
+    it.state = 'stuck';
+    rAF(function () {
+      tC(e, sticky, stuck);
+      if (pv !== 'fixed' || ns) return;
+      stl.top = '';
+      stl.bottom = '0';
+      stl.position = 'absolute';
+    });
+  }
+  return it;
+};
+
+/*
+  removes an instance 👋
+  --------
+  - cleanup instance
+*/
+Stickybits.prototype.removeInstance = function removeInstance(instance) {
+  var e = instance.el;
+  var p = instance.props;
+  var tC = this.toggleClasses;
+  e.style.position = '';
+  e.style[p.verticalPosition] = '';
+  tC(e, p.stickyClass);
+  tC(e, p.stuckClass);
+  tC(e.parentNode, p.parentClass);
+};
+
+/*
+  cleanup 🛁
+  --------
+  - cleans up each instance
+  - clears instance
+*/
+Stickybits.prototype.cleanup = function cleanup() {
+  for (var i = 0; i < this.instances.length; i += 1) {
+    var instance = this.instances[i];
+    instance.props.scrollEl.removeEventListener('scroll', instance.stateContainer);
+    this.removeInstance(instance);
+  }
+  this.manageState = false;
+  this.instances = [];
+};
+
+/*
+  export
+  --------
+  exports StickBits to be used 🏁
+*/
+function stickybits(target, o) {
+  return new Stickybits(target, o);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (stickybits);
 
 
 /***/ })

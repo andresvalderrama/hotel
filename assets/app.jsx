@@ -7,6 +7,7 @@ import axios from 'axios'
 import Disponibilidad from './components/Disponibilidad.jsx'
 import Habitaciones from './components/Habitaciones.jsx'
 import Huespedes from './components/Huespedes.jsx'
+import PrecioReserva from './components/PrecioReserva.jsx'
 import Reservar from './components/Reservar.jsx'
 
 class App extends React.Component {
@@ -55,7 +56,8 @@ class App extends React.Component {
       reserva: {
         registro: this.state.reserva.registro,
         salida: this.state.reserva.salida,
-        habitacion: this.state.reserva.habitacion
+        habitacion: this.state.reserva.habitacion,
+        tipo_habitacion: this.state.reserva.tipo_habitacion
       },
       huespedes: huespedesArray.length > 0 ? huespedesArray : this.state.huespedes,
       makingRequest: true
@@ -67,7 +69,8 @@ class App extends React.Component {
       reserva: {
         registro: this.state.reserva.registro,
         salida: this.state.reserva.salida,
-        habitacion: event.target.value ? Number(event.target.value) : this.state.reserva.habitacion
+        habitacion: event.target.value ? Number(event.target.value) : this.state.reserva.habitacion,
+        tipo_habitacion: event.target.dataset.tipo ? event.target.dataset.tipo : this.state.reserva.tipo_habitacion
       },
       huespedes: this.state.huespedes,
       reservar: true
@@ -102,8 +105,8 @@ class App extends React.Component {
   }
 
   componentDidUpdate () {
-    console.clear()
-    console.log('App state', this.state)
+    // console.clear()
+    // console.log('App state', this.state)
 
     if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
       this.habitacionesDisponibles()
@@ -113,7 +116,10 @@ class App extends React.Component {
   render () {
     return (<div>
       <form action='api/v1/reservas/crear' method='post' onSubmit={this.reservar}>
-        <h2>Reservas</h2>
+        <h3 style={{marginButton: 0}}>Reserva</h3>
+        {this.state.habitaciones && this.state.reserva.habitacion
+          ? <PrecioReserva parentState={this.state} />
+          : ''}
         <Disponibilidad
           parentState={this.state}
           actualizarFechaRegistro={this.actualizarFechaRegistro.bind(this)}

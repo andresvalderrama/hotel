@@ -64,4 +64,11 @@ html.home {
       }
     }
   }
+  & section.precio-reserva {
+    background: #fff;
+    padding: 0.5rem 0;
+    z-index: 99;
+    font-size: 80%;
+    text-align: center;
+  }
 }

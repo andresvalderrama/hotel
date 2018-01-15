@@ -222,6 +222,7 @@ body {
   max-width: 430px;
   padding: 48px 0 0;
   padding: 3rem 0 0;
+  overflow-x: hidden;
 }
 pre {
   white-space: normal;
@@ -348,7 +349,8 @@ header#header {
   position: fixed;
   text-align: center;
   top: 0;
-  width: 100%
+  width: 100%;
+  z-index: 9
 }
 header#header a {
     color: #fff;
@@ -425,4 +427,12 @@ html.home section.huespedes .huesped .counter {
 html.home section.huespedes .huesped .counter:before {
     counter-increment: section;
     content: counter(section);
+}
+html.home section.precio-reserva {
+    background: #fff;
+    padding: 8px 0;
+    padding: 0.5rem 0;
+    z-index: 99;
+    font-size: 80%;
+    text-align: center;
 }
