@@ -11,9 +11,9 @@ export default class Habitaciones extends React.Component {
         <b className='one legend'>Habitaciones disponibles</b>
         {this.props.parentState.habitaciones.map((habitacion) => {
           return (<fieldset key={habitacion.id}>
-            <input type='radio' name='habitacion' value={habitacion.id} id={`habitacion-${habitacion.numero}`} required
+            <input type='radio' name='habitacion' value={habitacion.id} id={`habitacion-${habitacion.numero_habitacion}`} required
               onChange={this.props.habitacionSeleccionada} />
-            <label htmlFor={`habitacion-${habitacion.numero}`}>habitacion {habitacion.numero}</label>
+            <label htmlFor={`habitacion-${habitacion.numero_habitacion}`}>habitacion {habitacion.numero_habitacion}</label>
           </fieldset>)
         })}
       </section>

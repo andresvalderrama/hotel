@@ -2,7 +2,7 @@ import './main.scss'
 
 import React from 'react'
 import { render } from 'react-dom'
-// import axios from 'axios'
+import axios from 'axios'
 
 import Disponibilidad from './components/Disponibilidad.jsx'
 import Habitaciones from './components/Habitaciones.jsx'
@@ -118,7 +118,15 @@ class App extends React.Component {
     console.log('App state', this.state)
 
     if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {
-      this.fakeRequest()
+      // this.fakeRequest()
+      axios.post('/api/v1/reservas', this.state.reserva)
+        .then(response => {
+          this.setState({
+            habitaciones: response.data,
+            makingRequest: false
+          })
+        })
+        .catch(error => console.error(error))
     }
   }
 

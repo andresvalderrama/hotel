@@ -36420,13 +36420,13 @@ var Habitaciones = function (_React$Component) {
             return _react2.default.createElement(
               'fieldset',
               { key: habitacion.id },
-              _react2.default.createElement('input', { type: 'radio', name: 'habitacion', value: habitacion.id, id: 'habitacion-' + habitacion.numero, required: true,
+              _react2.default.createElement('input', { type: 'radio', name: 'habitacion', value: habitacion.id, id: 'habitacion-' + habitacion.numero_habitacion, required: true,
                 onChange: _this2.props.habitacionSeleccionada }),
               _react2.default.createElement(
                 'label',
-                { htmlFor: 'habitacion-' + habitacion.numero },
+                { htmlFor: 'habitacion-' + habitacion.numero_habitacion },
                 'habitacion ',
-                habitacion.numero
+                habitacion.numero_habitacion
               )
             );
           })
