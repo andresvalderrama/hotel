@@ -27,11 +27,11 @@
 + chrome - `v56`
 
 ## Instalación
-1 npm install
-1 crear archivo `.env` apartir del archivi `.env.example` y cambiar los valores de las variables
-1 migrar la base de datos con el comando `npm run migrate:latest`
-1 seed base de datos con el comando `npmr run seed:run`
-1 npm start
+1. npm install
+1. crear archivo `.env` apartir del archivi `.env.example` y cambiar los valores de las variables
+1. migrar la base de datos con el comando `npm run migrate:latest`
+1. seed base de datos con el comando `npmr run seed:run`
+1. npm start
 
 el servidor correra en el puerto 3000
 
