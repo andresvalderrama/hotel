@@ -8,7 +8,9 @@
     "start": "node --require dotenv/config bin/www",
     "dev": "nodemon -e js --require dotenv/config ./bin/www",
     "webpack": "node_modules/.bin/webpack",
-    "migrate:latest": "node --require dotenv/config node_modules/.bin/knex migrate:latest"
+    "migrate:latest": "node --require dotenv/config node_modules/.bin/knex migrate:latest",
+    "migrate:rollback": "node --require dotenv/config node_modules/.bin/knex migrate:rollback",
+    "seed:run": "node --require dotenv/config node_modules/.bin/knex seed:run"
   },
   "author": "Andres Valderrama",
   "license": "ISC",

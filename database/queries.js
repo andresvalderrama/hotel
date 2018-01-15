@@ -1,7 +1,7 @@
 const hotel = require('./connection')
 
 function Reservaciones () {
-  return hotel('reservaciones')
+  return hotel('habitaciones')
 }
 
 function getReservaciones (data) {
