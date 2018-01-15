@@ -397,10 +397,7 @@ html.home section.habitaciones input[type="radio"] {
     width: initial;
 }
 html.home section.habitaciones input[type="radio"]:checked + label {
-    background: #008489;
-    border-color: #008489;
-    color: #fff;
-    color: #fff;
+    border-color: currentColor;
 }
 html.home section.habitaciones span {
     position: absolute;

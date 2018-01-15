@@ -102,6 +102,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate () {
+    console.clear()
     console.log('App state', this.state)
 
     if (!!this.state.reserva.registro && !!this.state.reserva.salida && !!this.state.huespedes && this.state.makingRequest) {

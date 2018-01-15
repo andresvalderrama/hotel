@@ -34,9 +34,7 @@ html.home {
       width: initial;
     }
     & input[type="radio"]:checked + label {
-      background: #008489;
-      border-color: #008489;
-      color: var(--white, #fff);
+      border-color: currentColor;
     }
     & span {
       position: absolute;
